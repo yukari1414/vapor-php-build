@@ -47,8 +47,8 @@ RUN set -xe; \
     CPPFLAGS="-I${INSTALL_DIR}/include  -I/usr/include" \
     LDFLAGS="-L${INSTALL_DIR}/lib64 -L${INSTALL_DIR}/lib" \
     ./configure \
-        --prefix=${INSTALL_DIR} \
-        --64
+    --prefix=${INSTALL_DIR} \
+    --64
 
 RUN set -xe; \
     make install \
@@ -74,12 +74,12 @@ RUN set -xe; \
     CPPFLAGS="-I${INSTALL_DIR}/include  -I/usr/include" \
     LDFLAGS="-L${INSTALL_DIR}/lib64 -L${INSTALL_DIR}/lib" \
     ./config \
-        --prefix=${INSTALL_DIR} \
-        --openssldir=${INSTALL_DIR}/ssl \
-        --release \
-        no-tests \
-        shared \
-        zlib
+    --prefix=${INSTALL_DIR} \
+    --openssldir=${INSTALL_DIR}/ssl \
+    --release \
+    no-tests \
+    shared \
+    zlib
 
 RUN set -xe; \
     make install \
@@ -103,11 +103,11 @@ RUN set -xe; \
     CPPFLAGS="-I${INSTALL_DIR}/include  -I/usr/include" \
     LDFLAGS="-L${INSTALL_DIR}/lib64 -L${INSTALL_DIR}/lib" \
     cmake .. \
-        -DBUILD_SHARED_LIBS=ON \
-        -DCRYPTO_BACKEND=OpenSSL \
-        -DENABLE_ZLIB_COMPRESSION=ON \
-        -DCMAKE_INSTALL_PREFIX=${INSTALL_DIR} \
-        -DCMAKE_BUILD_TYPE=RELEASE
+    -DBUILD_SHARED_LIBS=ON \
+    -DCRYPTO_BACKEND=OpenSSL \
+    -DENABLE_ZLIB_COMPRESSION=ON \
+    -DCMAKE_INSTALL_PREFIX=${INSTALL_DIR} \
+    -DCMAKE_BUILD_TYPE=RELEASE
 
 RUN set -xe; \
     cmake  --build . --target install
@@ -127,31 +127,31 @@ WORKDIR  ${CURL_BUILD_DIR}/
 
 RUN set -xe; \
     ./buildconf \
-     && CFLAGS="" \
-        CPPFLAGS="-I${INSTALL_DIR}/include  -I/usr/include" \
-        LDFLAGS="-L${INSTALL_DIR}/lib64 -L${INSTALL_DIR}/lib" \
-        ./configure \
-            --prefix=${INSTALL_DIR} \
-            --with-ca-bundle=${CA_BUNDLE} \
-            --enable-shared \
-            --disable-static \
-            --enable-optimize \
-            --disable-warnings \
-            --disable-dependency-tracking \
-            --with-zlib \
-            --enable-http \
-            --enable-ftp  \
-            --enable-file \
-            --enable-ldap \
-            --enable-ldaps  \
-            --enable-proxy  \
-            --enable-tftp \
-            --enable-ipv6 \
-            --enable-openssl-auto-load-config \
-            --enable-cookies \
-            --with-gnu-ld \
-            --with-ssl \
-            --with-libssh2
+    && CFLAGS="" \
+    CPPFLAGS="-I${INSTALL_DIR}/include  -I/usr/include" \
+    LDFLAGS="-L${INSTALL_DIR}/lib64 -L${INSTALL_DIR}/lib" \
+    ./configure \
+    --prefix=${INSTALL_DIR} \
+    --with-ca-bundle=${CA_BUNDLE} \
+    --enable-shared \
+    --disable-static \
+    --enable-optimize \
+    --disable-warnings \
+    --disable-dependency-tracking \
+    --with-zlib \
+    --enable-http \
+    --enable-ftp  \
+    --enable-file \
+    --enable-ldap \
+    --enable-ldaps  \
+    --enable-proxy  \
+    --enable-tftp \
+    --enable-ipv6 \
+    --enable-openssl-auto-load-config \
+    --enable-cookies \
+    --with-gnu-ld \
+    --with-ssl \
+    --with-libssh2
 
 RUN set -xe; \
     make install
@@ -174,16 +174,16 @@ RUN set -xe; \
     CPPFLAGS="-I${INSTALL_DIR}/include  -I/usr/include" \
     LDFLAGS="-L${INSTALL_DIR}/lib64 -L${INSTALL_DIR}/lib" \
     ./configure \
-        --prefix=${INSTALL_DIR} \
-        --with-sysroot=${INSTALL_DIR} \
-        --enable-shared \
-        --disable-static \
-        --with-html \
-        --with-history \
-        --enable-ipv6=no \
-        --with-icu \
-        --with-zlib=${INSTALL_DIR} \
-        --without-python
+    --prefix=${INSTALL_DIR} \
+    --with-sysroot=${INSTALL_DIR} \
+    --enable-shared \
+    --disable-static \
+    --with-html \
+    --with-history \
+    --enable-ipv6=no \
+    --with-icu \
+    --with-zlib=${INSTALL_DIR} \
+    --without-python
 
 RUN set -xe; \
     make install \
@@ -197,9 +197,9 @@ ENV ZIP_BUILD_DIR=${BUILD_DIR}/zip
 
 RUN set -xe; \
     mkdir -p ${ZIP_BUILD_DIR}/bin/; \
-# Download and upack the source code
+    # Download and upack the source code
     curl -Ls https://github.com/nih-at/libzip/archive/rel-${VERSION_ZIP//./-}.tar.gz \
-  | tar xzC ${ZIP_BUILD_DIR} --strip-components=1
+    | tar xzC ${ZIP_BUILD_DIR} --strip-components=1
 
 # Move into the unpackaged code directory
 WORKDIR  ${ZIP_BUILD_DIR}/bin/
@@ -281,9 +281,9 @@ RUN set -xe; \
     CPPFLAGS="-I${INSTALL_DIR}/include  -I/usr/include" \
     LDFLAGS="-L${INSTALL_DIR}/lib64 -L${INSTALL_DIR}/lib" \
     ./configure \
-        --prefix=${INSTALL_DIR} \
-        --enable-shared \
-        --disable-static
+    --prefix=${INSTALL_DIR} \
+    --enable-shared \
+    --disable-static
 
 RUN set -xe; \
     make install
@@ -306,9 +306,9 @@ RUN set -xe; \
     CPPFLAGS="-I${INSTALL_DIR}/include  -I/usr/include" \
     LDFLAGS="-L${INSTALL_DIR}/lib64 -L${INSTALL_DIR}/lib" \
     ./configure \
-        --prefix=${INSTALL_DIR} \
-        --enable-shared \
-        --disable-static
+    --prefix=${INSTALL_DIR} \
+    --enable-shared \
+    --disable-static
 
 RUN set -xe; \
     make install
@@ -331,44 +331,44 @@ WORKDIR  ${PHP_BUILD_DIR}/
 RUN LD_LIBRARY_PATH= yum install -y readline-devel gettext-devel libicu-devel libxslt-devel ImageMagick-devel
 
 RUN set -xe \
- && ./buildconf --force \
- && CFLAGS="-fstack-protector-strong -fpic -fpie -Os -I${INSTALL_DIR}/include -I/usr/include -ffunction-sections -fdata-sections" \
+    && ./buildconf --force \
+    && CFLAGS="-fstack-protector-strong -fpic -fpie -Os -I${INSTALL_DIR}/include -I/usr/include -ffunction-sections -fdata-sections" \
     CPPFLAGS="-fstack-protector-strong -fpic -fpie -Os -I${INSTALL_DIR}/include -I/usr/include -ffunction-sections -fdata-sections" \
     LDFLAGS="-L${INSTALL_DIR}/lib64 -L${INSTALL_DIR}/lib -Wl,-O1 -Wl,--strip-all -Wl,--hash-style=both -pie" \
     ./configure \
-        --build=x86_64-pc-linux-gnu \
-        --prefix=${INSTALL_DIR} \
-        --enable-option-checking=fatal \
-        --enable-maintainer-zts \
-        --with-config-file-path=${INSTALL_DIR}/etc/php \
-        --with-config-file-scan-dir=${INSTALL_DIR}/etc/php/conf.d:/var/task/php/conf.d \
-        --enable-fpm \
-        --disable-cgi \
-        --enable-cli \
-        --with-png-dir=${INSTALL_DIR} \
-        --with-jpeg-dir=${INSTALL_DIR} \
-        --with-xsl=${INSTALL_DIR} \
-        --with-gd \
-        --disable-phpdbg \
-        --disable-phpdbg-webhelper \
-        --with-sodium \
-        --with-readline \
-        --with-openssl \
-        --with-zlib=${INSTALL_DIR} \
-        --with-zlib-dir=${INSTALL_DIR} \
-        --with-curl=${INSTALL_DIR} \
-        --enable-bcmath \
-        --enable-exif \
-        --enable-ftp \
-        --with-gettext \
-        --enable-mbstring \
-        --enable-soap \
-        --with-pdo-mysql=shared,mysqlnd \
-        --enable-pcntl \
-        --enable-zip \
-        --with-pdo-pgsql=shared,${INSTALL_DIR} \
-        --enable-intl=shared \
-        --enable-opcache-file
+    --build=x86_64-pc-linux-gnu \
+    --prefix=${INSTALL_DIR} \
+    --enable-option-checking=fatal \
+    --enable-maintainer-zts \
+    --with-config-file-path=${INSTALL_DIR}/etc/php \
+    --with-config-file-scan-dir=${INSTALL_DIR}/etc/php/conf.d:/var/task/php/conf.d \
+    --enable-fpm \
+    --disable-cgi \
+    --enable-cli \
+    --with-png-dir=${INSTALL_DIR} \
+    --with-jpeg-dir=${INSTALL_DIR} \
+    --with-xsl=${INSTALL_DIR} \
+    --with-gd \
+    --disable-phpdbg \
+    --disable-phpdbg-webhelper \
+    --with-sodium \
+    --with-readline \
+    --with-openssl \
+    --with-zlib=${INSTALL_DIR} \
+    --with-zlib-dir=${INSTALL_DIR} \
+    --with-curl=${INSTALL_DIR} \
+    --enable-bcmath \
+    --enable-exif \
+    --enable-ftp \
+    --with-gettext \
+    --enable-mbstring \
+    --enable-soap \
+    --with-pdo-mysql=shared,mysqlnd \
+    --enable-pcntl \
+    --enable-zip \
+    --with-pdo-pgsql=shared,${INSTALL_DIR} \
+    --enable-intl=shared \
+    --enable-opcache-file
 
 RUN make -j $(nproc)
 
@@ -385,6 +385,9 @@ RUN pecl install -f redis-4.3.0
 
 # RUN pecl install imagick
 RUN pecl install imagick
+
+# RUN pecl install mongodb
+RUN pecl install mongodb-1.6.0
 
 # Strip All Unneeded Symbols
 
