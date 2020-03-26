@@ -219,9 +219,9 @@ ENV ZIP_BUILD_DIR=${BUILD_DIR}/zip
 
 RUN set -xe; \
     mkdir -p ${ZIP_BUILD_DIR}/bin/; \
-    # Download and upack the source code
+# Download and upack the source code
     curl -Ls https://github.com/nih-at/libzip/archive/rel-${VERSION_ZIP//./-}.tar.gz \
-    | tar xzC ${ZIP_BUILD_DIR} --strip-components=1
+  | tar xzC ${ZIP_BUILD_DIR} --strip-components=1
 
 # Move into the unpackaged code directory
 WORKDIR  ${ZIP_BUILD_DIR}/bin/
