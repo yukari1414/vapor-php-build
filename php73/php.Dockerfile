@@ -112,6 +112,27 @@ RUN set -xe; \
 RUN set -xe; \
     cmake  --build . --target install
 
+# Build nghttp2 (https://github.com/nghttp2/nghttp2/releases/)
+
+ARG nghttp2
+ENV VERSION_NGHTTP2=${nghttp2}
+ENV NGHTTP2_BUILD_DIR=${BUILD_DIR}/nghttp2
+
+RUN set -xe; \
+    mkdir -p ${NGHTTP2_BUILD_DIR}/bin; \
+    curl -Ls https://github.com/nghttp2/nghttp2/releases/download/v${VERSION_NGHTTP2}/nghttp2-${VERSION_NGHTTP2}.tar.gz \
+    | tar xzC ${NGHTTP2_BUILD_DIR} --strip-components=1
+
+WORKDIR  ${NGHTTP2_BUILD_DIR}/
+
+RUN set -xe; \
+    autoreconf -i && \
+    automake && \
+    autoconf && \
+    ./configure && \
+    make && \
+    make install
+
 # Build Curl (https://github.com/curl/curl/releases/)
 
 ARG curl
@@ -151,7 +172,8 @@ RUN set -xe; \
             --enable-cookies \
             --with-gnu-ld \
             --with-ssl \
-            --with-libssh2
+            --with-libssh2 \
+            --with-nghttp2=/usr/local
 
 RUN set -xe; \
     make install
@@ -358,6 +380,7 @@ RUN set -xe \
         --with-zlib-dir=${INSTALL_DIR} \
         --with-curl=${INSTALL_DIR} \
         --enable-bcmath \
+        --enable-sockets \
         --enable-exif \
         --enable-ftp \
         --with-gettext \
@@ -381,7 +404,7 @@ RUN set -xe; \
     cp php.ini-production ${INSTALL_DIR}/etc/php/php.ini
 
 # RUN pecl install redis
-RUN pecl install -f redis-4.3.0
+RUN pecl install -f redis
 
 # RUN pecl install imagick
 RUN pecl install imagick
