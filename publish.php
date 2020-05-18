@@ -9,7 +9,7 @@ require_once __DIR__ . '/vendor/autoload.php';
 Dotenv::createImmutable(__DIR__)->safeLoad();
 
 $layers = [
-    'php-73' => 'Laravel Vapor PHP 7.3',
+    'php-73' => 'Laravel Vapor PHP 7.3.18 (with mongodb-1.6.0)',
     // 'php-74' => 'Laravel Vapor PHP 7.4',
 ];
 
